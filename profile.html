@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile</title>
+  <style>
+    body {
+      background-color: #1D3A45;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background-color: #2f820c;
+      border-radius: 10;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-weight: bolder;
+      position: relative;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: black;
+      letter-spacing: 1px;
+    }
+    .btn-back {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: black;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .btn-back:hover { text-decoration: underline; color: black; }
+
+    /* MAIN */
+    .page-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+    }
+
+    .profile-card {
+      background: #075147;
+      border: 1px solid white;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(26,26,46,0.10);
+      padding: 2.8rem 2.5rem;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    /* AVATAR */
+    .avatar-circle {
+      width: 80px;
+      height: 80px;
+      background: #A1F57D;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: black;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .profile-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: wheat;
+      text-align: center;
+    }
+    .profile-username {
+      color: #A1F57D;
+      font-size: 0.88rem;
+      text-align: center;
+      margin-top: 0.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* SECTIONS */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: aliceblue;
+      margin: 1.5rem 0 0.8rem;
+      border-bottom: 2px solid white;
+      padding-bottom: 0.3rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .detail-row:last-child { border-bottom: none; }
+
+    .detail-key {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .detail-value {
+      font-size: 0.92rem;
+      color: wheat;
+      flex: 1;
+    }
+
+    /* BUTTON */
+    .btn-edit {
+      display: block;
+      background: #A1F57D;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.75rem;
+      width: 100%;
+      margin-top: 1.8rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-edit:hover { background: #3a9a11; color: black; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="welcome.html" class="btn-back">← Back</a>
+    <span class="navbar-brand">My Profile</span>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="profile-card">
+
+      <!-- Avatar -->
+      <div class="avatar-circle" id="avatarInitials">?</div>
+      <div class="profile-name" id="profileName">—</div>
+      <div class="profile-username" id="profileUsername">@—</div>
+
+      <!-- Personal Info -->
+      <div class="section-label">Personal Info</div>
+      <div class="detail-row">
+        <div class="detail-key">Full Name</div>
+        <div class="detail-value" id="detailName">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Date of Birth</div>
+        <div class="detail-value" id="detailDob">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Age</div>
+        <div class="detail-value" id="detailAge">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Gender</div>
+        <div class="detail-value" id="detailGender">—</div>
+      </div>
+
+      <!-- Contact -->
+      <div class="section-label">Contact</div>
+      <div class="detail-row">
+        <div class="detail-key">Email Address</div>
+        <div class="detail-value" id="detailEmail">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Phone Number</div>
+        <div class="detail-value" id="detailPhone">—</div>
+      </div>
+
+      <!-- Account -->
+      <div class="section-label">Account</div>
+      <div class="detail-row">
+        <div class="detail-key">Username</div>
+        <div class="detail-value" id="detailUsername">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Password</div>
+        <div class="detail-value" style="letter-spacing: 3px; color: rgba(255,255,255,0.4);">••••••••</div>
+      </div>
+
+      <a href="index.html" class="btn-edit">✎ Edit Details</a>
+
+    </div>
+  </div>
+
+  <script>
+    const fullName = localStorage.getItem('fullName') || 'Unknown';
+    const dob      = localStorage.getItem('dob')      || '';
+    const gender   = localStorage.getItem('gender')   || '—';
+    const email    = localStorage.getItem('email')    || '—';
+    const phone    = localStorage.getItem('phone')    || '—';
+    const username = localStorage.getItem('username') || '—';
+
+    // Initials
+    const parts = fullName.trim().split(' ');
+    const initials = parts.length >= 2
+      ? parts[0][0].toUpperCase() + parts[parts.length - 1][0].toUpperCase()
+      : parts[0][0].toUpperCase();
+
+    // Format DOB
+    function formatDob(dobStr) {
+      if (!dobStr) return '—';
+      const d = new Date(dobStr);
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    // Age
+    function calcAge(dobStr) {
+      if (!dobStr) return '—';
+      return Math.floor((Date.now() - new Date(dobStr)) / (1000 * 60 * 60 * 24 * 365.25)) + ' years';
+    }
+
+    document.getElementById('avatarInitials').textContent  = initials;
+    document.getElementById('profileName').textContent     = fullName;
+    document.getElementById('profileUsername').textContent = '@' + username;
+    document.getElementById('detailName').textContent      = fullName;
+    document.getElementById('detailDob').textContent       = formatDob(dob);
+    document.getElementById('detailAge').textContent       = calcAge(dob);
+    document.getElementById('detailGender').textContent    = gender;
+    document.getElementById('detailEmail').textContent     = email;
+    document.getElementById('detailPhone').textContent     = phone;
+    document.getElementById('detailUsername').textContent  = '@' + username;
+  </script>
+
+</body>
+</html>
