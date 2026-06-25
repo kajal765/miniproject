@@ -1,314 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://jsdelivr.net" rel="stylesheet">
-    <style>
-    body{
-        background-color: #1D3A45;
-    }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        /* NAVBAR */
-    .navbar {
-      background-color:#2f820c;
-      border-radius: 10;
-      text-align: center;
-      padding: 1rem 2rem;
-      font-weight: bolder;
-    }
-    .navbar-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: black;
-      letter-spacing: 1px;
-    }
-    /* MAIN LAYOUT */
-    .page-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2.5rem 1rem;
-    }
-
-    .form-card {
-      background: #075147;
-      border: 1px solid ;
-      border-radius: 16px;
-      box-shadow: 0 8px 40px rgba(26,26,46,0.10), 0 2px 8px rgba(201,168,76,0.08);
-      padding: 2.8rem 2.5rem;
-      width: 100%;
-      max-width: 560px;
-    }
-
-    .form-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: wheat;
-      margin-bottom: 0.25rem;
-    }
-    .form-subtitle {
-      color:wheat;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color:aliceblue;
-      margin: 1.5rem 0 0.8rem;
-      border-bottom: 2px solid white;
-      padding-bottom: 0.3rem;
-    }
-
-    label {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.886);
-      margin-bottom: 4px;
-      display: block;
-    }
-
-    .form-control, .form-select {
-      display: block;
-      width:100%;
-      border: 1.5px solid white;
-      border-radius: 8px;
-      padding: 0.6rem 0.9rem;
-      font-size: 0.92rem;
-      font-family: 'DM Sans', sans-serif;
-      color: black;
-      background: #faf9f7;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    
-    }
-    .form-control:focus, .form-select:focus {
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
-      outline: none;
-      background: #fff;
-    }
-    .form-control.is-invalid {
-      border-color: rgb(207, 7, 7);
-    }
-    .error-msg {
-      font-size: 0.78rem;
-      color:rgb(207, 7, 7) ;
-      margin-top: 4px;
-      display: none;
-    }
-    .error-msg.visible { display: block; }
-
-    .btn-submit {
-      background:#A1F57D;
-      color: black;
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      padding: 0.75rem;
-      width: 100%;
-      margin-top: 1.8rem;
-      cursor: pointer;
-    }
-    .btn-submit:hover {
-      background: #3a9a11;
-      color:black;
-    }
-
-    .gender-group {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .gender-option {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-      font-size: 0.88rem;
-      color:rgba(255, 255, 255, 0.886);
-    }
-    .gender-option input { accent-color:rgb(93, 111, 93); }
-
-   </style>
-
-    <title>Registration Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<link href="https://jsdelivr.net" rel="stylesheet">
+<style>
+body { background-color: #1D3A45; font-family: 'DM Sans', sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAVBAR */
+.navbar { background-color:#2f820c; border-radius: 10px; text-align: center; padding: 1rem 2rem; font-weight: bolder; }
+.navbar-brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: black; letter-spacing: 1px; width: 100%; text-align: center; }
+/* MAIN LAYOUT */
+.page-wrapper { display: flex; align-items: center; justify-content: center; padding: 2.5rem 1rem; }
+.form-card { background: #075147; border: 1px solid white; border-radius: 16px; box-shadow: 0 8px 40px rgba(26,26,46,0.10); padding: 2.8rem 2.5rem; width: 100%; max-width: 560px; }
+.form-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: wheat; margin-bottom: 0.25rem; }
+.form-subtitle { color:wheat; font-size: 0.9rem; margin-bottom: 2rem; font-weight: 300; }
+.section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color:aliceblue; margin: 1.5rem 0 0.8rem; border-bottom: 2px solid white; padding-bottom: 0.3rem; }
+label { font-size: 0.82rem; font-weight: 500; color: rgba(255, 255, 255, 0.886); margin-bottom: 4px; display: block; }
+.form-control { display: block; width: 100%; border: 1.5px solid white; border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.92rem; font-family: 'DM Sans', sans-serif; color: black; background: #faf9f7; transition: border-color 0.2s, box-shadow 0.2s; }
+.form-control:focus { box-shadow: 0 0 0 3px rgba(201,168,76,0.15); outline: none; background: #fff; }
+.form-control.is-invalid { border-color: rgb(207, 7, 7); }
+.error-msg { font-size: 0.78rem; color:rgb(221, 62, 62); margin-top: 4px; display: none; }
+.error-msg.visible { display: block; }
+.btn-submit { background:#A1F57D; color: black; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.5px; padding: 0.75rem; width: 100%; margin-top: 1.8rem; cursor: pointer; }
+.btn-submit:hover { background: #3a9a11; color:black; }
+.gender-group { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.gender-option { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.88rem; color:rgba(255, 255, 255, 0.886); }
+.gender-option input { accent-color:rgb(93, 111, 93); }
+</style>
 </head>
 <body>
-    <!-- NAVBAR -->
-  <nav class="navbar">
-    <span class="navbar-brand">Registration Form</span>
-  </nav>
-  <div class="page-wrapper">
-    <div class="form-card">
-      <div class="form-title">Create Account</div>
-      <div class="form-subtitle">Fill in your details to get started</div>
 
-      <form id="regForm" novalidate>
+<nav class="navbar">
+<span class="navbar-brand">Registration Form</span>
+</nav>
 
-        <!-- PERSONAL INFO -->
-        <div class="section-label">Personal Info</div>
+<div class="page-wrapper">
+  <div class="form-card">
+    <div class="form-title">Create Account</div>
+    <div class="form-subtitle">Fill in your details to get started</div>
+    
+    <form id="regForm" novalidate>
+      <!-- Hidden variable field tracking profile updates -->
+      <input type="hidden" id="editUserId">
 
-        <div class="mb-3">
-          <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" class="form-control" placeholder="Enter your full name"/>
-          <div class="error-msg" id="err-fullName">Name must contain only letters and spaces.</div>
+      <!-- PERSONAL INFO -->
+      <div class="section-label">Personal Info</div>
+      <div class="mb-3">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name"/>
+        <div class="error-msg" id="err-fullName">Name must contain only letters and spaces.</div>
+      </div>
+      
+      <div class="row g-3 mb-3">
+        <div class="col-6">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" class="form-control"/>
+          <div class="error-msg" id="err-dob">You must be at least 13 years old.</div>
         </div>
-
-        <div class=" g-3 mb-3">
-          <div >
-            <label for="dob">Date of Birth</label>
-            <input type="date" id="dob" class="form-control"/>
-            <div class="error-msg" id="err-dob">You must be at least 13 years old.</div>
+        <div class="col-6">
+          <label>Gender</label>
+          <div class="gender-group mt-1">
+            <label class="gender-option"><input type="radio" name="gender" value="Male"/> Male</label>
+            <label class="gender-option"><input type="radio" name="gender" value="Female"/> Female</label>
+            <label class="gender-option"><input type="radio" name="gender" value="Other"/> Other</label>
           </div>
-          <div >
-            <label>Gender</label>
-            <div class="gender-group mt-1">
-              <label class="gender-option"><input type="radio" name="gender" value="Male"/> Male</label>
-              <label class="gender-option"><input type="radio" name="gender" value="Female"/> Female</label>
-              <label class="gender-option"><input type="radio" name="gender" value="Other"/> Other</label>
-            </div>
-            <div class="error-msg" id="err-gender">Please select a gender.</div>
-          </div>
+          <div class="error-msg" id="err-gender">Please select a gender.</div>
         </div>
-        <!-- CONTACT -->
-        <div class="section-label">Contact</div>
+      </div>
 
-        <div class="mb-3">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" class="form-control" placeholder="you@example.com"/>
-          <div class="error-msg" id="err-email">Enter a valid email address.</div>
-        </div>
+      <!-- CONTACT -->
+      <div class="section-label">Contact</div>
+      <div class="mb-3">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" class="form-control" placeholder="you@example.com"/>
+        <div class="error-msg" id="err-email">Enter a valid email address.</div>
+      </div>
+      <div class="mb-3">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" class="form-control" placeholder="10-digit number"/>
+        <div class="error-msg" id="err-phone">Enter a valid 10-digit phone number.</div>
+      </div>
 
-        <div class="mb-3">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="form-control" placeholder="10-digit number"/>
-          <div class="error-msg" id="err-phone">Enter a valid 10-digit phone number.</div>
-        </div>
-
-        <!-- ACCOUNT -->
-        <div class="section-label">Account</div>
-
-        <div class="mb-3">
-          <label for="username">Username</label>
-          <input type="text" id="username" class="form-control" placeholder="Choose a username"/>
-          <div class="error-msg" id="err-username">Username must be 3-20 characters, letters/numbers/underscores only.</div>
-        </div>
-
+      <!-- ACCOUNT -->
+      <div class="section-label">Account</div>
+      <div class="mb-3">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" placeholder="Choose a username"/>
+        <div class="error-msg" id="err-username">Username must be 3-20 characters, letters/numbers/underscores only.</div>
+      </div>
+      
+      <div id="passwordContainer">
         <div class="mb-3">
           <label for="password">Password</label>
           <input type="password" id="password" class="form-control" placeholder="Min 8 chars, 1 number, 1 uppercase"/>
           <div class="error-msg" id="err-password">Password must be 8+ chars with at least 1 uppercase and 1 number.</div>
         </div>
-
         <div class="mb-3">
           <label for="confirmPassword">Confirm Password</label>
           <input type="password" id="confirmPassword" class="form-control" placeholder="Repeat your password"/>
           <div class="error-msg" id="err-confirmPassword">Passwords do not match.</div>
         </div>
+      </div>
 
-        <button type="submit" class="btn-submit">Create My Account →</button>
-      </form>
-    </div>
+      <button type="submit" class="btn-submit">Create My Account →</button>
+    </form>
   </div>
+</div>
+<script>
+function showError(id, show) {
+  const el = document.getElementById('err-' + id);
+  const input = document.getElementById(id);
+  if (show) {
+    if (el) el.classList.add('visible');
+    if (input) input.classList.add('is-invalid');
+  } else {
+    if (el) el.classList.remove('visible');
+    if (input) input.classList.remove('is-invalid');
+  }
+}
 
-
-    <script src="https://jsdelivr.net"></script>
-    <script>
-  
-    function showError(id, show) {
-      const el = document.getElementById('err-' + id);
-      const input = document.getElementById(id);
-      if (show) {
-        el.classList.add('visible');
-        if (input) input.classList.add('is-invalid');
-      } else {
-        el.classList.remove('visible');
-        if (input) input.classList.remove('is-invalid');
-      }
+// Check for incoming modifications parameters
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const editId = urlParams.get('editId');
+  if (editId) {
+    const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    const user = users.find(u => u.id === editId);
+    if (user) {
+      document.getElementById('editUserId').value = user.id;
+      document.querySelector('.form-title').textContent = "Modify Account";
+      document.querySelector('.btn-submit').textContent = "Save Profile Changes ✓";
+      document.getElementById('fullName').value = user.fullName;
+      document.getElementById('dob').value = user.dob;
+      document.getElementById('email').value = user.email;
+      document.getElementById('phone').value = user.phone;
+      document.getElementById('username').value = user.username;
+      
+      const genderRad = document.querySelector(`input[name="gender"][value="${user.gender}"]`);
+      if (genderRad) genderRad.checked = true;
+      
+      document.getElementById('passwordContainer').style.display = 'none';
     }
+  }
+});
 
-    function validate() {
-      let valid = true;
+function validate() {
+  let valid = true;
+  const isEditing = !!document.getElementById('editUserId').value;
 
-      // Full Name
-      const name = document.getElementById('fullName').value.trim();
-      if (!/^[a-zA-Z\s]+$/.test(name) || name === '') {
-        showError('fullName', true); valid = false;
-      } else showError('fullName', false);
+  const name = document.getElementById('fullName').value.trim();
+  if (!/^[a-zA-Z\s]+$/.test(name) || name === "") { showError('fullName', true); valid = false; } else showError('fullName', false);
 
-      // DOB — must be at least 13
-      const dob = document.getElementById('dob').value;
-      if (!dob) {
-        showError('dob', true); valid = false;
-      } else {
-        const age = (new Date() - new Date(dob)) / (1000 * 60 * 60 * 24 * 365.25);
-        if (age < 13) { showError('dob', true); valid = false; }
-        else showError('dob', false);
-      }
+  const dob = document.getElementById('dob').value;
+  if (!dob) { showError('dob', true); valid = false; } else {
+    const age = (new Date() - new Date(dob)) / (1000 * 60 * 60 * 24 * 365.25);
+    if (age < 13) { showError('dob', true); valid = false; } else showError('dob', false);
+  }
 
-      // Gender
-      const gender = document.querySelector('input[name="gender"]:checked');
-      if (!gender) {
-        document.getElementById('err-gender').classList.add('visible'); valid = false;
-      } else {
-        document.getElementById('err-gender').classList.remove('visible');
-      }
+  const gender = document.querySelector('input[name="gender"]:checked');
+  if (!gender) { showError('gender', true); valid = false; } else showError('gender', false);
 
-      // Email
-      const email = document.getElementById('email').value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError('email', true); valid = false;
-      } else showError('email', false);
+  const email = document.getElementById('email').value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); valid = false; } else showError('email', false);
 
-      // Phone
-      const phone = document.getElementById('phone').value.trim();
-      if (!/^\d{10}$/.test(phone)) {
-        showError('phone', true); valid = false;
-      } else showError('phone', false);
+  const phone = document.getElementById('phone').value.trim();
+  if (!/^\d{10}$/.test(phone)) { showError('phone', true); valid = false; } else showError('phone', false);
 
-      // Username
-      const username = document.getElementById('username').value.trim();
-      if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
-        showError('username', true); valid = false;
-      } else showError('username', false);
+  const username = document.getElementById('username').value.trim();
+  if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) { showError('username', true); valid = false; } else showError('username', false);
 
-      // Password
-      const password = document.getElementById('password').value;
-      if (!/(?=.*[A-Z])(?=.*\d).{8,}/.test(password)) {
-        showError('password', true); valid = false;
-      } else showError('password', false);
+  if (!isEditing) {
+    const password = document.getElementById('password').value;
+    if (!/(?=.*[A-Z])(?=.*\d).{8,}/.test(password)) { showError('password', true); valid = false; } else showError('password', false);
 
-      // Confirm Password
-      const confirm = document.getElementById('confirmPassword').value;
-      if (confirm !== password) {
-        showError('confirmPassword', true); valid = false;
-      } else showError('confirmPassword', false);
+    const confirm = document.getElementById('confirmPassword').value;
+    if (confirm !== password || !confirm) { showError('confirmPassword', true); valid = false; } else showError('confirmPassword', false);
+  }
+  return valid;
+}
 
-      return valid;
-    }
+document.getElementById('regForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!validate()) return;
 
-    document.getElementById('regForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (!validate()) return;
+  let usersList = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+  const editId = document.getElementById('editUserId').value;
+  const gender = document.querySelector('input[name="gender"]:checked').value;
 
-      // Save to localStorage
-      const gender = document.querySelector('input[name="gender"]:checked').value;
-      localStorage.setItem('fullName', document.getElementById('fullName').value.trim());
-      localStorage.setItem('dob', document.getElementById('dob').value);
-      localStorage.setItem('gender', gender);
-      localStorage.setItem('email', document.getElementById('email').value.trim());
-      localStorage.setItem('phone', document.getElementById('phone').value.trim());
-      localStorage.setItem('username', document.getElementById('username').value.trim());
+  const payload = {
+    id: editId ? editId : Date.now().toString(),
+    fullName: document.getElementById('fullName').value.trim(),
+    dob: document.getElementById('dob').value,
+    gender: gender,
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    username: document.getElementById('username').value.trim()
+  };
 
-      window.location.href = "welcome.html";
-    });
-  </script>
+  if (editId) {
+    usersList = usersList.map(u => u.id === editId ? payload : u);
+  } else {
+    usersList.push(payload);
+  }
 
+  localStorage.setItem('registeredUsers', JSON.stringify(usersList));
+  localStorage.setItem('latestActiveUserId', payload.id);
+  window.location.href = "welcome.html";
+});
+</script>
 </body>
 </html>

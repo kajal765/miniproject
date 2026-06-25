@@ -1,119 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome</title>
-  <style>
-    body {
-      background-color: #1D3A45;
-      font-family: 'DM Sans', sans-serif;
-      margin: 0;
-    }
-
-    /* NAVBAR */
-    .navbar {
-      background-color: #2f820c;
-      border-radius: 10;
-      text-align: center;
-      padding: 1rem 2rem;
-      font-weight: bolder;
-    }
-    .navbar-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: black;
-      letter-spacing: 1px;
-    }
-
-    /* MAIN */
-    .page-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 70px);
-      padding: 2rem 1rem;
-    }
-
-    .welcome-card {
-      background: #075147;
-      border: 1px solid white;
-      border-radius: 16px;
-      box-shadow: 0 8px 40px rgba(26,26,46,0.10), 0 2px 8px rgba(201,168,76,0.08);
-      padding: 3rem 2.5rem;
-      width: 100%;
-      max-width: 560px;
-      text-align: center;
-    }
-
-    .check-badge {
-      width: 70px;
-      height: 70px;
-      background: #A1F57D;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: black;
-      margin: 0 auto 1.5rem;
-    }
-
-    .welcome-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: wheat;
-      margin-bottom: 0.5rem;
-    }
-
-    .welcome-sub {
-      color: wheat;
-      font-size: 0.9rem;
-      font-weight: 300;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .btn-proceed {
-      display: inline-block;
-      background: #A1F57D;
-      color: black;
-      border: none;
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      padding: 0.75rem 2.5rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .btn-proceed:hover {
-      background: #3a9a11;
-      color: black;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Welcome</title>
+<style>
+body { background-color: #1D3A45; font-family: 'DM Sans', sans-serif; margin: 0; }
+.navbar { background-color: #2f820c; border-radius: 10px; text-align: center; padding: 1rem 2rem; font-weight: bolder; }
+.navbar-brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: black; letter-spacing: 1px; }
+.page-wrapper { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 70px); padding: 2rem 1rem; }
+.welcome-card { background: #075147; border: 1px solid white; border-radius: 16px; box-shadow: 0 8px 40px rgba(26,26,46,0.10); padding: 3rem 2.5rem; width: 100%; max-width: 560px; text-align: center; }
+.check-badge { width: 70px; height: 70px; background: #A1F57D; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: black; margin: 0 auto 1.5rem; font-weight: bold; line-height: 70px; }
+.welcome-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: wheat; margin-bottom: 0.5rem; }
+.welcome-sub { color: wheat; font-size: 0.9rem; font-weight: 300; margin-bottom: 2rem; line-height: 1.6; }
+.btn-proceed { display: inline-block; background: #A1F57D; color: black; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.5px; padding: 0.75rem 2.5rem; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.btn-proceed:hover { background: #3a9a11; color: black; }
+</style>
 </head>
 <body>
-
-  <nav class="navbar">
-    <span class="navbar-brand">Registration Form</span>
-  </nav>
-
-  <div class="page-wrapper">
-    <div class="welcome-card">
-      <div class="check-badge">✓</div>
-      <div class="welcome-title">Welcome, <span id="displayName">Friend</span>!</div>
-      <p class="welcome-sub">Your account has been created successfully.<br/>Click below to view your profile.</p>
-      <a href="profile.html" class="btn-proceed">View My Profile →</a>
-    </div>
-  </div>
-
-  <script>
-    const fullName = localStorage.getItem('fullName') || 'Friend';
-    document.getElementById('displayName').textContent = fullName.split(' ')[0];
-  </script>
-
+<nav class="navbar">
+<span class="navbar-brand">Registration Form</span>
+</nav>
+<div class="page-wrapper">
+<div class="welcome-card">
+<div class="check-badge">✓</div>
+<div class="welcome-title">Welcome, <span id="displayName">Friend</span>!</div>
+<p class="welcome-sub">Your account has been created successfully.<br/>Click below to view your profile.</p>
+<a href="profile.html" class="btn-proceed">View My Profile →</a>
+</div>
+</div>
+<script>
+const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+const activeId = localStorage.getItem('latestActiveUserId');
+const current = users.find(u => u.id === activeId) || { fullName: 'Friend' };
+document.getElementById('displayName').textContent = current.fullName.split(' ')[0];
+</script>
 </body>
 </html>

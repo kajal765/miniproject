@@ -148,6 +148,20 @@
   </nav>
 
   <div class="page-wrapper">
+  <!-- PROFILE MANAGER CONTROLS INTERFACE -->
+  <div style="max-width: 560px; margin: 0 auto 15px auto; display: flex; gap: 10px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 200px;">
+      <label style="color: wheat; font-size: 0.8rem; display: block; margin-bottom: 4px;">Active Profile Selector:</label>
+      <select id="profileSelector" class="form-select" style="background: #075147; color: wheat; border: 1px solid white;">
+        <!-- Dynamically populated via JavaScript -->
+      </select>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 10px;">
+      <a href="index.html" class="btn-proceed" style="padding: 0.6rem 1.2rem; background: #A1F57D; color: black; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 500;">+ Add Profile</a>
+      <button id="btnDeleteProfile" type="button" style="padding: 0.6rem 1.2rem; background: #ff4d4d; color: white; border-radius: 8px; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Delete Profile</button>
+    </div>
+  </div>
+
     <div class="profile-card">
 
       <!-- Avatar -->
@@ -201,43 +215,116 @@
     </div>
   </div>
 
-  <script>
-    const fullName = localStorage.getItem('fullName') || 'Unknown';
-    const dob      = localStorage.getItem('dob')      || '';
-    const gender   = localStorage.getItem('gender')   || '—';
-    const email    = localStorage.getItem('email')    || '—';
-    const phone    = localStorage.getItem('phone')    || '—';
-    const username = localStorage.getItem('username') || '—';
+    <script>
+    // Core state management structures
+    let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    let currentUserId = localStorage.getItem('latestActiveUserId');
 
-    // Initials
-    const parts = fullName.trim().split(' ');
-    const initials = parts.length >= 2
-      ? parts[0][0].toUpperCase() + parts[parts.length - 1][0].toUpperCase()
-      : parts[0][0].toUpperCase();
+    // UI elements references
+    const selector = document.getElementById('profileSelector');
+    const deleteBtn = document.getElementById('btnDeleteProfile');
+    const editLink = document.querySelector('.btn-edit');
 
-    // Format DOB
-    function formatDob(dobStr) {
-      if (!dobStr) return '—';
-      const d = new Date(dobStr);
-      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    // Startup system initialization pipeline
+    function initProfilePage() {
+      users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      
+      if (users.length === 0) {
+        alert("No user records found. Redirecting to registration page.");
+        window.location.href = "index.html";
+        return;
+      }
+
+      // If no pointer index exists, default to the last user profile in the array
+      if (!currentUserId || !users.some(u => u.id === currentUserId)) {
+        currentUserId = users[users.length - 1].id;
+        localStorage.setItem('latestActiveUserId', currentUserId);
+      }
+
+      populateProfileSelector();
+      renderUserProfileDetails(currentUserId);
     }
 
-    // Age
-    function calcAge(dobStr) {
-      if (!dobStr) return '—';
-      return Math.floor((Date.now() - new Date(dobStr)) / (1000 * 60 * 60 * 24 * 365.25)) + ' years';
+    // Build the select option nodes dynamically
+    function populateProfileSelector() {
+      selector.innerHTML = "";
+      users.forEach(user => {
+        const opt = document.createElement('option');
+        opt.value = user.id;
+        opt.textContent = `${user.fullName} (@${user.username})`;
+        if (user.id === currentUserId) opt.selected = true;
+        selector.appendChild(opt);
+      });
     }
 
-    document.getElementById('avatarInitials').textContent  = initials;
-    document.getElementById('profileName').textContent     = fullName;
-    document.getElementById('profileUsername').textContent = '@' + username;
-    document.getElementById('detailName').textContent      = fullName;
-    document.getElementById('detailDob').textContent       = formatDob(dob);
-    document.getElementById('detailAge').textContent       = calcAge(dob);
-    document.getElementById('detailGender').textContent    = gender;
-    document.getElementById('detailEmail').textContent     = email;
-    document.getElementById('detailPhone').textContent     = phone;
-    document.getElementById('detailUsername').textContent  = '@' + username;
+    // Render selected metadata fields to page dashboard layout fields
+    function renderUserProfileDetails(userId) {
+      const activeUser = users.find(u => u.id === userId);
+      if (!activeUser) return;
+
+      // 1. Render Initials Avatar Block
+      const parts = activeUser.fullName.trim().split(' ');
+      const initials = parts.length >= 2
+        ? parts[0][0].toUpperCase() + parts[parts.length - 1][0].toUpperCase()
+        : parts[0][0].toUpperCase();
+      
+      document.getElementById('avatarInitials').textContent = initials;
+      document.getElementById('profileName').textContent = activeUser.fullName;
+      document.getElementById('profileUsername').textContent = '@' + activeUser.username;
+
+      // 2. Format Date of Birth Profile Strings
+      let formattedDob = '—';
+      if (activeUser.dob) {
+        const d = new Date(activeUser.dob);
+        formattedDob = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+      document.getElementById('detailDob').textContent = formattedDob;
+
+      // 3. Dynamically calculate age fields
+      let computedAge = '—';
+      if (activeUser.dob) {
+        computedAge = Math.floor((Date.now() - new Date(activeUser.dob)) / (1000 * 60 * 60 * 24 * 365.25)) + ' years';
+      }
+
+      // 4. Update the remaining text content fields on your dashboard layout page
+      document.getElementById('detailName').textContent = activeUser.fullName;
+      document.getElementById('detailAge').textContent = computedAge;
+      document.getElementById('detailGender').textContent = activeUser.gender || '—';
+      document.getElementById('detailEmail').textContent = activeUser.email || '—';
+      document.getElementById('detailPhone').textContent = activeUser.phone || '—';
+      document.getElementById('detailUsername').textContent = '@' + activeUser.username;
+
+      // Update the edit action link target to include the specific user ID in the query string
+      editLink.href = `index.html?editId=${activeUser.id}`;
+    }
+
+    // Change profile target on dropdown change
+    selector.addEventListener('change', (e) => {
+      currentUserId = e.target.value;
+      localStorage.setItem('latestActiveUserId', currentUserId);
+      renderUserProfileDetails(currentUserId);
+    });
+
+    // Handle account profile deletion workflow
+    deleteBtn.addEventListener('click', () => {
+      const activeUser = users.find(u => u.id === currentUserId);
+      if (!activeUser) return;
+
+      if (confirm(`Are you sure you want to permanently delete the profile for ${activeUser.fullName}?`)) {
+        // Filter out the selected profile from our data collection array
+        users = users.filter(u => u.id !== currentUserId);
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+        
+        // Remove tracking references and reset layout configurations
+        localStorage.removeItem('latestActiveUserId');
+        currentUserId = null;
+        
+        initProfilePage();
+      }
+    });
+
+    // Mount page lifecycle on initial load
+    document.addEventListener('DOMContentLoaded', initProfilePage);
   </script>
 
 </body>
